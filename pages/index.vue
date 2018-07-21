@@ -3,10 +3,6 @@
     <div>
       <app-logo/>
 
-      <p class='subtext'>
-        small tiger
-      </p>
-
       <h2 class="subtitle">
         {{currentText}}
       </h2>
@@ -18,98 +14,106 @@
         <br>
         to put ideas into production
       </p>
-
-
       <p class='subtext'>
         contact us
-       <a href="mailto:info@smalltigergroup.com">info@smalltigergroup.com</a>
+       <a href="mailto:info@smalltigergroup.com?subject= How can Small Tiger help me in...">info@smalltigergroup.com</a>
       </p>
     </div>
   </section>
 </template>
 
 <script>
-
-import AppLogo from '~/components/AppLogo.vue'
+import AppLogo from "~/components/AppLogo.vue";
 
 export default {
   components: {
-    AppLogo,
+    AppLogo
   },
   data() {
     return {
       words: [
-        'design',
-        'digital presence',
-        'business intelligence',
-        'workplace strategy'
+        "business intelligence",
+        "software strategy",
+        "process optimization",
+        "blockchain",
+        "digital presence",
+        "workplace strategy"
       ],
       wordIndex: 0,
       currentIndex: 0,
-      currentWord: '',
-      pauseTime: 400,
-      inputInterval: 200,
-      eraseInterval: 150,
-      interval: null,
-    }
+      currentWord: "",
+      pauseTime: 300,
+      inputInterval: 150,
+      eraseInterval: 75,
+      interval: null
+    };
   },
   computed: {
-    currentText(){
+    currentText() {
       return this.currentWord.substr(0, this.currentIndex);
     }
   },
-  mounted(){
+  mounted() {
     this.initialize();
   },
   methods: {
-    initialize(){
+    initialize() {
       this.wordIndex = 0;
-      this.currentWord = this.words[this.wordIndex];
+      this.currentIndex = 0;
+      this.setWord();
       this.tickForwards();
     },
-    nextWord(){
-      if(this.wordIndex >= this.words.length - 1) {
-        console.log('back to beginning')
-        this.wordIndex = 0;
-        this.currentIndex = 0;
-        this.currentWord = this.words[this.wordIndex];
-        this.tickForwards()
+    nextWord() {
+      if (this.wordIndex >= this.words.length - 1) {
+        this.initialize();
       } else {
-        console.log('next!')
-        this.wordIndex = this.wordIndex + 1
+        this.wordIndex = this.wordIndex + 1;
         this.currentIndex = 0;
-        this.currentWord = this.words[this.wordIndex];
-        this.tickForwards()
+        this.setWord();
+        this.tickForwards();
       }
     },
-    tickForwards(){
-      this.interval = setInterval(()=>{
-        this.currentIndex = this.currentIndex + 1
-      }, this.inputInterval)
+    setWord(){
+        this.currentWord = this.words[this.wordIndex];
     },
-    tickBackwards(){
-      this.interval = setInterval(()=>{
-        this.currentIndex = this.currentIndex - 1
-      }, this.eraseInterval)
+    tickForwards() {
+      this.interval = setInterval(() => {
+        this.currentIndex = this.currentIndex + 1;
+      }, this.inputInterval);
+    },
+    tickBackwards() {
+      this.interval = setInterval(() => {
+        this.currentIndex = this.currentIndex - 1;
+      }, this.eraseInterval);
     }
   },
   watch: {
-    currentIndex:{
-      handler(){
-        if(this.currentIndex - (this.pauseTime/100) >= this.currentWord.length + 1){
+    currentIndex: {
+      handler() {
+        if (
+          this.currentIndex - this.pauseTime / 100 >=
+          (this.currentWord.length + 1)
+        ) {
+          //start ticking backwards after a slight weight time
           clearInterval(this.interval);
-          this.tickBackwards()
-        } else if (this.currentIndex < 0){
+          this.tickBackwards();
+        } else if (this.currentIndex < 0) {
           clearInterval(this.interval);
           this.nextWord();
         }
       }
     }
   }
-}
+};
 </script>
 
 <style>
+
+@keyframes fade {
+  to {
+    background-color: black
+   }
+}
 
 .container {
   min-height: 100vh;
@@ -117,29 +121,13 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: black;
+  background-color: #000b4d;
+  animation: fade 5s linear alternate infinite;
 }
 
-.title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.vue-typer {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtext{
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
+.subtext {
+  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
   display: block;
   font-weight: 300;
   font-size: 1em;
@@ -149,14 +137,9 @@ export default {
   padding-bottom: 20px;
 }
 
-.subtext a{
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
+.subtext a {
   display: block;
-  font-weight: 300;
-  font-size: 1em;
   color: #ffffff;
-  letter-spacing: 1px;
-  padding-bottom: 20px;
 }
 
 .subtitle {
@@ -168,23 +151,4 @@ export default {
   padding-bottom: 15px;
 }
 
-.links {
-  padding-top: 15px;
-}
-
-button {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
-  background-color: #000000;
-  border-color: #dbdbdb;
-  border-width: 1px;
-  color: #ffffff;
-  justify-content: center;
-  padding-bottom: calc(1.375em - 1px);
-  padding-left: .75em;
-  padding-right: .75em;
-  padding-top: calc(1.375em - 1px);
-  text-align: center;
-  white-space: nowrap;
-  border-radius: .5em;
-}
 </style>
