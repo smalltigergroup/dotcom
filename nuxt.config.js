@@ -14,7 +14,7 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'small tiger group' }
+      { hid: 'description', name: 'description', content: 'businesses worldwide rely on the expertise of small tiger group to put ideas into production. Specializing in process optimization, software strategy, and last mile onboarding' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }

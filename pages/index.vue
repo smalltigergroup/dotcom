@@ -8,7 +8,7 @@
       </h2>
 
       <p class='subtext'>
-        businesses world wide rely on 
+        businesses worldwide rely on 
         <br>
         the expertise of small tiger group
         <br>
@@ -37,7 +37,8 @@ export default {
         "process optimization",
         "blockchain",
         "digital presence",
-        "workplace strategy"
+        "workplace strategy",
+        "last mile onboarding",
       ],
       wordIndex: 0,
       currentIndex: 0,
@@ -134,7 +135,7 @@ export default {
   color: #ffffff;
   letter-spacing: 1px;
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 15;
 }
 
 .subtext a {
@@ -148,6 +149,7 @@ export default {
   font-size: 2em;
   color: #ffffff;
   word-spacing: 5px;
+  padding-top: 10px;
   padding-bottom: 15px;
 }
 
